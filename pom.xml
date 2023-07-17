@@ -3,14 +3,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.clsnull.erm</groupId>
-    <artifactId>erm</artifactId>
+    <groupId>com.clsnull.stadium</groupId>
+    <artifactId>stadium</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>erm-common</module>
-        <module>erm-admin</module>
-        <module>erm-security</module>
+        <module>stadium-common</module>
+        <module>stadium-admin</module>
+        <module>stadium-security</module>
+        <module>stadium-portal</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

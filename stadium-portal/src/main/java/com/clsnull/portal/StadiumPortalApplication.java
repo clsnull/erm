@@ -1,13 +1,13 @@
-package com.clsnull.erm;
+package com.clsnull.portal;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ErmAdminApplication {
+public class StadiumPortalApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ErmAdminApplication.class, args);
+        SpringApplication.run(StadiumPortalApplication.class, args);
     }
 
 }

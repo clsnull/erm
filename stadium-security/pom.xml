@@ -4,14 +4,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.clsnull</groupId>
-    <artifactId>erm-security</artifactId>
+    <artifactId>stadium-security</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
-    <name>erm-security</name>
+    <name>stadium-security</name>
 
     <parent>
-        <groupId>com.clsnull.erm</groupId>
-        <artifactId>erm</artifactId>
+        <groupId>com.clsnull.stadium</groupId>
+        <artifactId>stadium</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 </project>

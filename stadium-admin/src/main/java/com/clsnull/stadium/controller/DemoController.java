@@ -1,4 +1,4 @@
-package com.clsnull.erm.controller;
+package com.clsnull.stadium.controller;
 
 import org.springframework.stereotype.Controller;
 
