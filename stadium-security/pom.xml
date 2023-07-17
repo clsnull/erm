@@ -14,4 +14,11 @@
         <artifactId>stadium</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.clsnull.stadium</groupId>
+            <artifactId>stadium-common</artifactId>
+        </dependency>
+    </dependencies>
 </project>
