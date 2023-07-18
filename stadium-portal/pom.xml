@@ -12,6 +12,14 @@
     <groupId>com.clsnull</groupId>
     <artifactId>stadium-portal</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
     <name>stadium-portal</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.clsnull.stadium</groupId>
+            <artifactId>stadium-security</artifactId>
+        </dependency>
+    </dependencies>
 </project>

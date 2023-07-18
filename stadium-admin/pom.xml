@@ -6,6 +6,7 @@
     <groupId>com.clsnull.stadium</groupId>
     <artifactId>stadium-admin</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
     <name>stadium-admin</name>
 
@@ -14,4 +15,11 @@
         <artifactId>stadium</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.clsnull.stadium</groupId>
+            <artifactId>stadium-security</artifactId>
+        </dependency>
+    </dependencies>
 </project>

@@ -34,6 +34,10 @@
         <spring-data-commons.version>2.7.5</spring-data-commons.version>
         <stadium-common.version>0.0.1-SNAPSHOT</stadium-common.version>
         <stadium-security.version>0.0.1-SNAPSHOT</stadium-security.version>
+        <stadium-mbg.version>0.0.1-SNAPSHOT</stadium-mbg.version>
+        <pagehelper-starter.version>1.4.5</pagehelper-starter.version>
+        <pagehelper.version>5.3.2</pagehelper.version>
+        <mybatis-generator.version>1.4.1</mybatis-generator.version>
     </properties>
 
     <dependencies>
@@ -82,6 +86,29 @@
                 <groupId>com.clsnull.stadium</groupId>
                 <artifactId>stadium-security</artifactId>
                 <version>${stadium-security.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.clsnull.stadium</groupId>
+                <artifactId>stadium-mbg</artifactId>
+                <version>${stadium-mbg.version}</version>
+            </dependency>
+            <!--MyBatis分页插件starter-->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper-starter.version}</version>
+            </dependency>
+            <!-- MyBatis 生成器 -->
+            <dependency>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-core</artifactId>
+                <version>${mybatis-generator.version}</version>
+            </dependency>
+            <!--MyBatis分页插件-->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper</artifactId>
+                <version>${pagehelper.version}</version>
             </dependency>
             <!--集成druid连接池-->
             <dependency>
