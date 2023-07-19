@@ -19,6 +19,14 @@
     <dependencies>
         <dependency>
             <groupId>com.clsnull.stadium</groupId>
+            <artifactId>stadium-mbg</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.clsnull.stadium</groupId>
+            <artifactId>stadium-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.clsnull.stadium</groupId>
             <artifactId>stadium-security</artifactId>
         </dependency>
     </dependencies>
