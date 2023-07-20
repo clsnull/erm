@@ -12,6 +12,7 @@
         <module>stadium-admin</module>
         <module>stadium-security</module>
         <module>stadium-portal</module>
+        <module>stadium-mbg</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
