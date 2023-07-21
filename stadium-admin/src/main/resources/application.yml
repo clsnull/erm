@@ -1,6 +1,10 @@
 server:
-  port: 8080
+  port: 5280
 spring:
+  application:
+    name: stadium-admin
+  profiles:
+    active: dev
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
