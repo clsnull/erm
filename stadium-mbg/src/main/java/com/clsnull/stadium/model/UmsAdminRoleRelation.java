@@ -3,29 +3,37 @@ package com.clsnull.stadium.model;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 
-public class User implements Serializable {
-    @ApiModelProperty(value = "id")
-    private Integer id;
+public class UmsAdminRoleRelation implements Serializable {
+    private Long id;
 
-    @ApiModelProperty(value = "名称")
-    private String name;
+    private Long adminId;
+
+    private Long roleId;
 
     private static final long serialVersionUID = 1L;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Long getAdminId() {
+        return adminId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAdminId(Long adminId) {
+        this.adminId = adminId;
+    }
+
+    public Long getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
     }
 
     @Override
@@ -35,7 +43,8 @@ public class User implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", name=").append(name);
+        sb.append(", adminId=").append(adminId);
+        sb.append(", roleId=").append(roleId);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
