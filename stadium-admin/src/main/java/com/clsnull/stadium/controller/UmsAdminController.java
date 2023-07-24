@@ -1,10 +1,14 @@
 package com.clsnull.stadium.controller;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.clsnull.stadium.common.api.CommonResult;
 import com.clsnull.stadium.dto.UmsAdminLoginParam;
 import com.clsnull.stadium.dto.UmsAdminParam;
 import com.clsnull.stadium.model.UmsAdmin;
+import com.clsnull.stadium.model.UmsMenu;
+import com.clsnull.stadium.model.UmsRole;
 import com.clsnull.stadium.service.UmsAdminService;
+import com.clsnull.stadium.service.UmsRoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -14,7 +18,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/admin")
@@ -29,6 +35,9 @@ public class UmsAdminController {
 
     @Autowired
     UmsAdminService adminService;
+
+    @Autowired
+    UmsRoleService roleService;
 
     @ApiOperation(value = "用户注册")
     @RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -59,11 +68,21 @@ public class UmsAdminController {
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult getAdminInfo(Principal principal) {
-        if(principal==null){
+        if (principal == null) {
             return CommonResult.unauthorized(null);
         }
         String username = principal.getName();
+        HashMap<String, Object> data = new HashMap<>();
         UmsAdmin umsAdmin = adminService.getAdminByUsername(username);
-        return CommonResult.success(umsAdmin);
+        data.put("username", umsAdmin.getUsername());
+        data.put("menus", roleService.getMenuList(umsAdmin.getId()));
+        data.put("icon", umsAdmin.getIcon());
+        List<UmsRole> roleList = adminService.getRoleList(umsAdmin.getId());
+        if (CollectionUtil.isNotEmpty(roleList)) {
+            List<String> roles = roleList.stream().map(UmsRole::getName).collect(Collectors.toList());
+            data.put("roles", roles);
+        }
+
+        return CommonResult.success(data);
     }
 }

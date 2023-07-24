@@ -56,7 +56,7 @@ public interface UmsAdminService {
     /**
      * 根据用户id获取用户
      */
-    UmsAdmin getItem(Long id);
+    UmsAdmin getItem(Long adminId);
 
 
     /**
@@ -68,12 +68,12 @@ public interface UmsAdminService {
     /**
      * 修改指定用户信息
      */
-    int update(Long id, UmsAdmin admin);
+    int update(Long adminId, UmsAdmin admin);
 
     /**
      * 删除指定用户
      */
-    int delete(Long id);
+    int delete(Long adminId);
 
 
     /**
