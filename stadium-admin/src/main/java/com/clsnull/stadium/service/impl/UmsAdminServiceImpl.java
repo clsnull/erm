@@ -5,10 +5,12 @@ import com.clsnull.stadium.bo.AdminUserDetails;
 import com.clsnull.stadium.common.exception.Asserts;
 import com.clsnull.stadium.dao.UmsAdminRoleRelationDao;
 import com.clsnull.stadium.dto.UmsAdminParam;
+import com.clsnull.stadium.dto.UpdateAdminPasswordParam;
 import com.clsnull.stadium.mapper.UmsAdminMapper;
 import com.clsnull.stadium.model.UmsAdmin;
 import com.clsnull.stadium.model.UmsAdminExample;
 import com.clsnull.stadium.model.UmsResource;
+import com.clsnull.stadium.model.UmsRole;
 import com.clsnull.stadium.security.util.JwtTokenUtil;
 import com.clsnull.stadium.service.UmsAdminService;
 import org.slf4j.Logger;
@@ -91,5 +93,45 @@ public class UmsAdminServiceImpl implements UmsAdminService {
     @Override
     public List<UmsResource> getResourceList(Long adminId) {
         return adminRoleRelationDao.getResourceList(adminId);
+    }
+
+    @Override
+    public String refreshToken(String oldToken) {
+        return null;
+    }
+
+    @Override
+    public UmsAdmin getItem(Long id) {
+        return null;
+    }
+
+    @Override
+    public List<UmsAdmin> list(String keyword, Integer pageSize, Integer pageNum) {
+        return null;
+    }
+
+    @Override
+    public int update(Long id, UmsAdmin admin) {
+        return 0;
+    }
+
+    @Override
+    public int delete(Long id) {
+        return 0;
+    }
+
+    @Override
+    public int updateRole(Long adminId, List<Long> roleIds) {
+        return 0;
+    }
+
+    @Override
+    public List<UmsRole> getRoleList(Long adminId) {
+        return null;
+    }
+
+    @Override
+    public int updatePassword(UpdateAdminPasswordParam updatePasswordParam) {
+        return 0;
     }
 }
