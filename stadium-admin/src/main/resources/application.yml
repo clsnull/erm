@@ -34,11 +34,15 @@ secure:
       - /**/*.map
       - /favicon.ico
       - /admin/login
+      - /admin/register
+      - /admin/info
+      - /admin/logout
+      - /minio/upload
 
 jwt:
   tokenHeader: Authorization #JWT存储的请求头
   secret: stadium-admin-secret #JWT加解密使用的密钥
-  expiration: 1000 # 604800 #JWT的超期限时间(60*60*24*7)
+  expiration: 7200 # 604800 #JWT的超期限时间(60*60*2秒)
   tokenHead: 'Bearer ' #JWT负载中拿到的开头
 
 mybatis:

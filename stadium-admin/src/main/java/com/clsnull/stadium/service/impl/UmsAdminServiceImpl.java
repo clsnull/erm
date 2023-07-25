@@ -5,9 +5,11 @@ import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
 import com.clsnull.stadium.bo.AdminUserDetails;
 import com.clsnull.stadium.common.exception.Asserts;
+import com.clsnull.stadium.common.util.RequestUtil;
 import com.clsnull.stadium.dao.UmsAdminRoleRelationDao;
 import com.clsnull.stadium.dto.UmsAdminParam;
 import com.clsnull.stadium.dto.UpdateAdminPasswordParam;
+import com.clsnull.stadium.mapper.UmsAdminLoginLogMapper;
 import com.clsnull.stadium.mapper.UmsAdminMapper;
 import com.clsnull.stadium.mapper.UmsAdminRoleRelationMapper;
 import com.clsnull.stadium.model.*;
@@ -25,7 +27,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -41,6 +46,9 @@ public class UmsAdminServiceImpl implements UmsAdminService {
 
     @Autowired
     UmsAdminRoleRelationMapper adminRoleRelationMapper;
+
+    @Autowired
+    UmsAdminLoginLogMapper loginLogMapper;
 
     @Autowired
     JwtTokenUtil jwtTokenUtil;
@@ -81,13 +89,27 @@ public class UmsAdminServiceImpl implements UmsAdminService {
             SecurityContextHolder.getContext().setAuthentication(authentication);
             token = jwtTokenUtil.generateToken(userDetails);
 
-            // TODO 记录登录日志
+            insertLoginLog(username);
         } catch (AuthenticationException e) {
             LOGGER.warn("登录异常：{}", e.getMessage());
         }
         return token;
     }
-
+    /**
+     * 添加登录记录
+     * @param username 用户名
+     */
+    private void insertLoginLog(String username) {
+        UmsAdmin admin = getAdminByUsername(username);
+        if(admin==null) return;
+        UmsAdminLoginLog loginLog = new UmsAdminLoginLog();
+        loginLog.setAdminId(admin.getId());
+        loginLog.setCreateTime(new Date());
+        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletRequest request = attributes.getRequest();
+        loginLog.setIp(RequestUtil.getRequestIp(request));
+        loginLogMapper.insert(loginLog);
+    }
     @Override
     public UserDetails loadUserByUser(String username) {
         UmsAdmin admin = getAdminByUsername(username);
@@ -119,7 +141,6 @@ public class UmsAdminServiceImpl implements UmsAdminService {
     @Override
     public String refreshToken(String oldToken) {
         return jwtTokenUtil.refreshHeadToken(oldToken);
-        ;
     }
 
     @Override
