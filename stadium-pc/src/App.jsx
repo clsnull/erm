@@ -1,22 +1,13 @@
-import {Route, Link } from 'react-router-dom'
+import { RouterProvider } from 'react-router-dom'
+import routes from '@/router/index'
+import '@/styles/index.less'
+import { Provider } from 'react-redux'
+import { store } from '@/store'
 function App() {
-
   return (
-    <Route>
-      <h1>Hello World</h1>
-      <div>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>  <li>
-            <Link to="/about">About</Link>
-          </li>  <li>
-            <Link to="/dashboard">Dashboard</Link>
-          </li>
-          <hr></hr>
-        </ul>
-      </div>
-    </Route>
+    <Provider store={store}>
+      <RouterProvider router={routes}></RouterProvider>
+    </Provider>
   )
 }
 
