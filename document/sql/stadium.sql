@@ -20,7 +20,7 @@ CREATE TABLE `ums_admin`
 -- ----------------------------
 -- Records of ums_admin
 -- ----------------------------
-INSERT INTO `ums_admin`VALUES (1, 'test', '$2a$10$NZ5o7r2E.ayT2ZoxgjlI.eJ6OEYqjH7INR/F.mXDbjZJi9HF0YCVG','https://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/icon/github_icon_02.png', 'test@qq.com', '测试账号', NULL,'2018-09-29 13:55:30', '2018-09-29 13:55:39', 1);
+INSERT INTO `ums_admin`VALUES (1, 'admin', '$2a$10$NZ5o7r2E.ayT2ZoxgjlI.eJ6OEYqjH7INR/F.mXDbjZJi9HF0YCVG','https://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/icon/github_icon_02.png', 'test@qq.com', '测试账号', NULL,'2018-09-29 13:55:30', '2018-09-29 13:55:39', 1);
 
 -- ----------------------------
 -- Table structure for ums_admin_login_log

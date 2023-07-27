@@ -1,22 +1,33 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
-    userInfo: 0,
     token: '',
-    menus: []
+    userInfo: {},
+    menus: [],
+    roles: [],
+    loginParam: {
+        username: '',
+        password: ''
+    }
 }
 export const userSlice = createSlice({
     name: "user",
     initialState,
     reducers: {
-        login: (state) => {
-            state.value += 1
+        login: (state, payload) => {
+            state.token = payload
+        },
+        rememberMe: (state, payload) => {
+            state.loginParam = payload
+        },
+        updateUserInfo: (state, payload) => {
+            state.userInfo = payload
         },
         logout: (state) => {
-            state.value -= 1
+            state.token = ''
         }
     }
 })
 
-export const { increment, decrement } = userSlice.actions
+export const { login, logout, updateUserInfo, rememberMe } = userSlice.actions
 
 export default userSlice.reducer
