@@ -1,23 +1,38 @@
 import { Button, Checkbox, Form, Input } from 'antd';
 import {
-    adminLogin
+    adminLogin,
+    adminInfo
 } from '@/api/admin'
 import { useSelector, useDispatch } from 'react-redux';
-import { login } from '@/store/user/userSlice'
+import { login, rememberMe, setUserInfo } from '@/store/user/userSlice'
 
 const Login = () => {
     const loginParam = useSelector(state => state.user.loginParam)
-    const dispatch = useDispatch()
 
+    const dispatch = useDispatch()
+    const getUserInfo = async () => {
+        let res = await adminInfo()
+        dispatch(setUserInfo(res.data))
+    }
     const onFinish = async (values) => {
         console.log('Success:', values);
         const params = {
             username: values.username,
             password: values.password
         }
+
         let res = await adminLogin(params)
-        console.log(res)
-        dispatch(login(res.data))
+
+        const token = res.data.token
+
+        //获取用户信息
+        getUserInfo()
+        //登录
+        dispatch(login(token))
+        if (values.remember) {
+            dispatch(rememberMe(params))
+        }
+        //前往首页
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -25,15 +40,15 @@ const Login = () => {
     };
 
     return (
-        <div className="w-screen h-screen bg-sky-200 relative">
+        <div className="relative w-screen h-screen bg-sky-200">
             <div className="bg-white absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] p-4 rounded-md shadow-md">
-                <h1 className="text-center my-10 text-4xl">Stadium 管理系统</h1>
+                <h1 className="my-10 text-4xl text-center">Stadium 管理系统</h1>
                 <Form
                     name="basic"
                     labelCol={{ span: 5 }}
                     wrapperCol={{ span: 16 }}
                     style={{ maxWidth: 600 }}
-                    initialValues={{ remember: true }}
+                    initialValues={{ remember: true, username: loginParam.username, password: loginParam.password }}
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}
                     autoComplete="off"

@@ -7,3 +7,10 @@ export function adminLogin(data) {
         data
     })
 }
+
+export function adminInfo() {
+    return request({
+        url: '/admin/info',
+        method: 'get'
+    })
+}
