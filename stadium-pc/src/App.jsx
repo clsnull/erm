@@ -7,7 +7,7 @@ import router from '@/router/index'
 function App() {
   return (
     <Provider store={store}>
-      <RouterProvider router={router}></RouterProvider>
+      <RouterProvider router={router} fallbackElement={<h1>Initial Load...</h1>}></RouterProvider>
     </Provider>
   )
 }

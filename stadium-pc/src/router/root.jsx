@@ -4,7 +4,7 @@ import {
     MenuUnfoldOutlined,
 } from '@ant-design/icons';
 import { Layout, Menu, Button, theme } from 'antd';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 const { Header, Sider, Content } = Layout;
 import { routes } from '@/router/index'
 
@@ -31,12 +31,16 @@ const Index = () => {
     function onClickMenu(e) {
         navigate(e.key)
     }
-
+    let location = useLocation()
+    const defaultSelectedKeys = location.pathname
+    const defaultOpenKeys = defaultSelectedKeys.split('/').filter(item => item).map(item => '/' + item)
     return (
         <Layout>
             <Sider trigger={null} collapsible collapsed={collapsed} theme='dark'>
                 <div className="demo-logo-vertical" />
                 <Menu
+                    defaultSelectedKeys={[defaultSelectedKeys]}
+                    defaultOpenKeys={defaultOpenKeys}
                     theme="dark"
                     mode="inline"
                     items={items}

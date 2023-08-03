@@ -1,6 +1,6 @@
 function Role() {
     return (
-        <h1>Resource</h1>
+        <h1>Role</h1>
     )
 }
 

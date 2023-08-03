@@ -10,14 +10,19 @@ import Page404 from '@/pages/error/404'
 import { DashboardOutlined, UserOutlined, MenuOutlined, SettingOutlined, ContainerOutlined, UsergroupAddOutlined } from '@ant-design/icons'
 
 export const routes = [
+
     {
         path: "/",
         element: <Root />,
         errorElement: <Page404 />,
+        loader() {
+            console.log('loader')
+            return true
+        },
         children: [
             {
                 index: false,
-                path: "home",
+                path: "/home",
                 label: '首页',
                 icon: <DashboardOutlined />,
                 element: <Home />
@@ -50,13 +55,18 @@ export const routes = [
             }
         ]
     },
+
 ]
 
 const baseRoutes = [
     {
         path: '/login',
         Component: Login
-    }
+    },
+    {
+        path: "/",
+        element: <Navigate to='/home' />,
+    },
 ]
 const router = createBrowserRouter([...baseRoutes, ...routes])
 
