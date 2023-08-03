@@ -4,20 +4,23 @@ import Menu from '@/pages/ums/menu/menu'
 import Resource from '@/pages/ums/resource/resource'
 import User from '@/pages/ums/user/user'
 import Role from '@/pages/ums/role/role'
-import { createBrowserRouter, Navigate } from 'react-router-dom'
+import { createBrowserRouter, Navigate, redirect } from 'react-router-dom'
 import Root from './root'
 import Page404 from '@/pages/error/404'
 import { DashboardOutlined, UserOutlined, MenuOutlined, SettingOutlined, ContainerOutlined, UsergroupAddOutlined } from '@ant-design/icons'
-
+import { store } from '@/store/index'
+console.log()
 export const routes = [
-
     {
         path: "/",
         element: <Root />,
         errorElement: <Page404 />,
         loader() {
-            console.log('loader')
-            return true
+            const token = store.getState().user.token
+            if (!token) {
+                return redirect('/login')
+            }
+            return {};
         },
         children: [
             {
