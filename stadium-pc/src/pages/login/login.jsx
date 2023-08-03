@@ -5,8 +5,10 @@ import {
 } from '@/api/admin'
 import { useSelector, useDispatch } from 'react-redux';
 import { login, rememberMe, setUserInfo } from '@/store/user/userSlice'
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+    const navigate = useNavigate()
     const loginParam = useSelector(state => state.user.loginParam)
 
     const dispatch = useDispatch()
@@ -33,6 +35,7 @@ const Login = () => {
             dispatch(rememberMe(params))
         }
         //前往首页
+        navigate('/')
     };
 
     const onFinishFailed = (errorInfo) => {
