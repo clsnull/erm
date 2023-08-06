@@ -2,8 +2,9 @@ import { useState } from 'react';
 import {
     MenuFoldOutlined,
     MenuUnfoldOutlined,
+    UserOutlined
 } from '@ant-design/icons';
-import { Layout, Menu, Button, theme } from 'antd';
+import { Layout, Menu, Button, theme, Avatar } from 'antd';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 const { Header, Sider, Content } = Layout;
 import { routes } from '@/router/index'
@@ -47,8 +48,8 @@ const Index = () => {
                     onClick={onClickMenu}
                 />
             </Sider>
-            <Layout>
-                <Header style={{ padding: 0, background: colorBgContainer }}>
+            <Layout className='h-screen'>
+                <Header style={{ background: colorBgContainer }} className='flex items-center justify-between pr-[16px] pl-0'>
                     <Button
                         type="text"
                         icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
@@ -59,12 +60,13 @@ const Index = () => {
                             height: 64,
                         }}
                     />
+                    <Avatar size={45} icon={<UserOutlined />} />
                 </Header>
                 <Content
+                    className='overflow-y-scroll '
                     style={{
                         margin: '24px 16px',
                         padding: 24,
-                        minHeight: 280,
                         background: colorBgContainer,
                     }}
                 >

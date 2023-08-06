@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 const Login = () => {
     const navigate = useNavigate()
     const loginParam = useSelector(state => state.user.loginParam)
-
+    console.log('2323',useSelector(state => state.user))
     const dispatch = useDispatch()
     const getUserInfo = async () => {
         let res = await adminInfo()

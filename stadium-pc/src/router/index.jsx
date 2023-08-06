@@ -9,7 +9,7 @@ import Root from './root'
 import Page404 from '@/pages/error/404'
 import { DashboardOutlined, UserOutlined, MenuOutlined, SettingOutlined, ContainerOutlined, UsergroupAddOutlined } from '@ant-design/icons'
 import { store } from '@/store/index'
-console.log()
+
 export const routes = [
     {
         path: "/",
@@ -17,6 +17,7 @@ export const routes = [
         errorElement: <Page404 />,
         loader() {
             const token = store.getState().user.token
+            console.log('loader', store.getState().user)
             if (!token) {
                 return redirect('/login')
             }
@@ -61,7 +62,7 @@ export const routes = [
 
 ]
 
-const baseRoutes = [
+export const baseRoutes = [
     {
         path: '/login',
         Component: Login
@@ -71,6 +72,7 @@ const baseRoutes = [
         element: <Navigate to='/home' />,
     },
 ]
+
 const router = createBrowserRouter([...baseRoutes, ...routes])
 
 export default router;
