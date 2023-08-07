@@ -6,6 +6,7 @@ const { Column } = Table
 
 function User() {
     let [dataSource, setDataSource] = useState([])
+    let [visible, setVisible] = useState(false)
     async function getAdminList() {
         const params = {
             pageNum: 1,
@@ -30,7 +31,9 @@ function User() {
     return (
         <div>
             <div className='mb-2'>
-                <Button type='primary'>添加用户</Button>
+                <Button type='primary' onClick={() => {
+                    setVisible(true)
+                }}>添加用户</Button>
             </div>
             <Table dataSource={dataSource} onChange={tableChange}>
                 <Column align='center' title="序号" dataIndex="id" key="id" />
@@ -60,36 +63,49 @@ function User() {
                 }} />
             </Table>
 
-            <UserForm visible={true}></UserForm>
+            <UserForm visible={visible} onOk={(e) => {
+                console.log(e)
+            }} onCancel={() => {
+                setVisible(false)
+            }}></UserForm>
         </div>
     )
 }
 
 function UserForm(props) {
-    console.log(props)
+    const [form] = Form.useForm()
+    const onOk = () => {
+        form.submit()
+    }
+    const onCancel = () => {
+        props.onCancel()
+    }
+    const onFinish = (e) => {
+        console.log('onFinish', e)
+    }
     return (
-        <Modal open={props.visible} title='添加用户'>
-            <Form>
-                <Form.Item label="头像">
+        <Modal open={props.visible} title='添加用户' onOk={onOk} onCancel={onCancel}>
+            <Form className='mt-10' form={form} onFinish={onFinish} initialValues={{ status: true }} labelAlign='right' labelCol={{ span: 4 }}>
+                <Form.Item label="头像" name="avatar" required rules={[{ required: true }]}>
                     <Input />
                 </Form.Item>
-                <Form.Item label="账号">
+                <Form.Item label="账号" name="username" required rules={[{ required: true }]}>
                     <Input />
                 </Form.Item>
-                <Form.Item label="姓名">
+                <Form.Item label="姓名" name="nickName" required rules={[{ required: true }]}>
                     <Input />
                 </Form.Item>
-                <Form.Item label="邮箱">
+                <Form.Item label="邮箱" name="email" required rules={[{ required: true }]}>
                     <Input />
                 </Form.Item>
-                <Form.Item label="密码">
+                <Form.Item label="密码" name="password" required rules={[{ required: true }]}>
                     <Input />
                 </Form.Item>
-                <Form.Item label="备注">
+                <Form.Item label="备注" name="note">
                     <Input />
                 </Form.Item>
-                <Form.Item label="是否启用">
-                    <Input />
+                <Form.Item label="是否启用" name="status" valuePropName='checked'>
+                    <Switch />
                 </Form.Item>
             </Form>
         </Modal>

@@ -30,7 +30,7 @@ service.interceptors.response.use(function (response) {
             type: 'user/logout',
             payload: ''
         })
-        Navigate('/login')
+        window.location.href = '/login'
     }
     if (result.code == 200) {
         return result;
