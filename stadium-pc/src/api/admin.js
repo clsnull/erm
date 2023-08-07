@@ -14,3 +14,10 @@ export function adminInfo() {
         method: 'get'
     })
 }
+
+export function adminList() {
+    return request({
+        url: '/admin/list',
+        method: 'get'
+    })
+}

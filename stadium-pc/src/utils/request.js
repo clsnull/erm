@@ -2,6 +2,7 @@ import axios from "axios";
 import { message } from "antd";
 
 import { store } from '@/store/index';
+import { Navigate } from "react-router-dom";
 
 const service = axios.create({
     baseURL: 'http://localhost:5173/api',
@@ -24,6 +25,13 @@ service.interceptors.response.use(function (response) {
     // 2xx 范围内的状态码都会触发该函数。
     // 对响应数据做点什么
     const result = response.data;
+    if (result.code == 401) {
+        store.dispatch({
+            type: 'user/logout',
+            payload: ''
+        })
+        Navigate('/login')
+    }
     if (result.code == 200) {
         return result;
     }
