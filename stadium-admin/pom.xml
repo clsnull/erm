@@ -25,5 +25,9 @@
             <groupId>com.clsnull.stadium</groupId>
             <artifactId>stadium-security</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.aliyun.oss</groupId>
+            <artifactId>aliyun-sdk-oss</artifactId>
+        </dependency>
     </dependencies>
 </project>

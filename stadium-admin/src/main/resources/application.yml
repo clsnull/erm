@@ -49,3 +49,16 @@ mybatis:
   mapper-locations:
     - classpath:dao/*.xml
     - classpath*:com/**/mapper/*.xml
+
+aliyun:
+  oss:
+    endpoint: oss-cn-hangzhou.aliyuncs.com # oss对外服务的访问域名
+    accessKeyId: xxx # 访问身份验证中用到用户标识
+    accessKeySecret: xxx # 用户用于加密签名字符串和oss用来验证签名字符串的密钥
+    bucketName: clsnull-stadium-oss # oss的存储空间
+    policy:
+      expire: 300 # 签名有效期(S)
+    maxSize: 10 # 上传文件大小(M)
+    callback: http://39.98.190.128:8080/aliyun/oss/callback # 文件上传成功后的回调地址
+    dir:
+      prefix: stadium/images/ # 上传文件夹路径前缀
