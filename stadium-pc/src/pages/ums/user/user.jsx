@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { adminList } from '@/api/admin'
+import SingleUpload from '@/components/SingleUpload'
 import { Table, Image, Button, Switch, Form, Modal, Input } from "antd"
 import { useEffect, useState } from "react"
 const { Column } = Table
@@ -87,7 +88,7 @@ function UserForm(props) {
         <Modal open={props.visible} title='添加用户' onOk={onOk} onCancel={onCancel}>
             <Form className='mt-10' form={form} onFinish={onFinish} initialValues={{ status: true }} labelAlign='right' labelCol={{ span: 4 }}>
                 <Form.Item label="头像" name="avatar" required rules={[{ required: true }]}>
-                    <Input />
+                    <SingleUpload />
                 </Form.Item>
                 <Form.Item label="账号" name="username" required rules={[{ required: true }]}>
                     <Input />
