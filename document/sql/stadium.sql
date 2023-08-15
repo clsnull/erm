@@ -313,3 +313,6 @@ INSERT INTO `ums_role_resource_relation` VALUES (247, 1, 31);
 INSERT INTO `ums_role_resource_relation` VALUES (248, 1, 32);
 
 SET FOREIGN_KEY_CHECKS = 1;
+
+
+-- 体育场类型，场地类型，体育场，场地，时间段，会员，会员卡，订单表

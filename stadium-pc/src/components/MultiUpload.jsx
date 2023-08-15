@@ -6,8 +6,8 @@ import { message, Upload } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
 
-function SingleUpload({ value, onChange }) {
-    let [OSSData, setOSSData] = useState()
+function MultiUpload({ value, onChange, maxCount = 5 }) {
+    const [OSSData, setOSSData] = useState()
     const [fileList, setFileList] = useState([])
 
     async function beforeUpload(file) {
@@ -25,15 +25,15 @@ function SingleUpload({ value, onChange }) {
 
     const handleChange = ({ fileList: newFileList }) => {
         setFileList(newFileList)
-        if (newFileList.length !== 0) {
-            onChange?.(newFileList[0].url);
-        } else {
-            onChange?.('')
-        }
+        onChange?.([...newFileList]);
     }
 
-    const onRemove = () => {
-        onChange?.('');
+    const onRemove = (file) => {
+        const newFileList = (value || []).filter((v) => v.url !== file.url);
+        setFileList(newFileList)
+        if (onChange) {
+            onChange(newFileList);
+        }
     };
 
     function getExtraData(file) {
@@ -45,7 +45,7 @@ function SingleUpload({ value, onChange }) {
         }
     }
 
-    const init = async () => {
+    async function init() {
         try {
             const result = await policy();
             setOSSData(result.data);
@@ -58,9 +58,7 @@ function SingleUpload({ value, onChange }) {
     }, [])
     useEffect(() => {
         if (!value) return
-        setFileList([{
-            url: value,
-        }])
+        setFileList([...value])
     }, [value])
     const uploadProps = {
         name: 'file',
@@ -78,11 +76,11 @@ function SingleUpload({ value, onChange }) {
     );
     return (
         <>
-            <Upload {...uploadProps} fileList={fileList} maxCount={1}>
-                {fileList.length >= 1 ? null : uploadButton}
+            <Upload {...uploadProps} fileList={fileList} maxCount={maxCount}>
+                {fileList.length >= maxCount ? null : uploadButton}
             </Upload>
         </>
     )
 }
 
-export default SingleUpload
+export default MultiUpload

@@ -21,3 +21,31 @@ export function adminList() {
         method: 'get'
     })
 }
+export function adminRegister(data) {
+    return request({
+        url: '/admin/register',
+        method: 'post',
+        data
+    })
+}
+export function adminDelete(id) {
+    return request({
+        url: `/admin/delete/${id}`,
+        method: 'post'
+    })
+}
+
+export function getAdminById(id) {
+    return request({
+        url: `/admin/${id}`,
+        method: 'get'
+    })
+}
+
+export function adminUpdate(id, data) {
+    return request({
+        url: `/admin/update/${id}`,
+        method: 'post',
+        data
+    })
+}

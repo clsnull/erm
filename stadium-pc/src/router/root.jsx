@@ -8,9 +8,11 @@ import { Layout, Menu, Button, theme, Avatar } from 'antd';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 const { Header, Sider, Content } = Layout;
 import { routes } from '@/router/index'
+import { useSelector } from 'react-redux';
 
 const Index = () => {
     const [collapsed, setCollapsed] = useState(false);
+    const { payload: userInfo } = useSelector(state => state.user.userInfo)
     const navigate = useNavigate()
     const {
         token: { colorBgContainer },
@@ -60,7 +62,7 @@ const Index = () => {
                             height: 64,
                         }}
                     />
-                    <Avatar size={45} icon={<UserOutlined />} />
+                    <Avatar size={45} icon={<UserOutlined />} src={userInfo.icon} />
                 </Header>
                 <Content
                     className='overflow-y-scroll '
