@@ -16,11 +16,13 @@ function UserForm(props) {
     const addUser = async (params) => {
         let res = await adminRegister(params)
         console.log('add', res, params)
+        form.resetFields()
         props.onOk()
     }
     const updateUser = async (id, params) => {
         let res = await adminUpdate(id, params)
         console.log('update', res, params)
+        form.resetFields()
         props.onOk()
     }
     const onFinish = (e) => {
@@ -39,7 +41,7 @@ function UserForm(props) {
     }, [props.id])
 
     const getAdminInfo = async () => {
-        if (!props.id) return;
+        if (!props.id || !props.visible) return;
         let res = await getAdminById(props.id)
         form.setFieldsValue({
             ...res.data,
@@ -55,13 +57,13 @@ function UserForm(props) {
                 <Form.Item label="账号" name="username" required rules={[{ required: true }]}>
                     <Input />
                 </Form.Item>
+                <Form.Item label="密码" name="password" required={!props.id} rules={[{ required: !props.id }]}>
+                    <Input />
+                </Form.Item>
                 <Form.Item label="姓名" name="nickName" required rules={[{ required: true }]}>
                     <Input />
                 </Form.Item>
                 <Form.Item label="邮箱" name="email" required rules={[{ required: true }]}>
-                    <Input />
-                </Form.Item>
-                <Form.Item label="密码" name="password" required={!props.id} rules={[{ required: !props.id }]}>
                     <Input />
                 </Form.Item>
                 <Form.Item label="备注" name="note">

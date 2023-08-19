@@ -4,26 +4,29 @@ import {
     MenuUnfoldOutlined,
     UserOutlined
 } from '@ant-design/icons';
-import { Layout, Menu, Button, theme, Avatar } from 'antd';
+import { Layout, Menu, Button, theme, Avatar, Dropdown } from 'antd';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 const { Header, Sider, Content } = Layout;
 import { routes } from '@/router/index'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '@/store/user/userSlice'
 
 const Index = () => {
     const [collapsed, setCollapsed] = useState(false);
     const { payload: userInfo } = useSelector(state => state.user.userInfo)
+    const dispatch = useDispatch()
+
     const navigate = useNavigate()
     const {
         token: { colorBgContainer },
     } = theme.useToken();
 
-    function getItem(label, key, icon, children, type) {
+    const getItem = (label, key, icon, children, type) => {
         return {
             label, key, icon, children, type
         }
     }
-    function getTreeMenu(route) {
+    const getTreeMenu = (route) => {
         if (!route) return null;
         return route.map(item => {
             return getItem(item.label, item.path, item.icon, getTreeMenu(item.children))
@@ -31,8 +34,16 @@ const Index = () => {
     }
     const items = getTreeMenu(routes[0].children)
 
-    function onClickMenu(e) {
+    const onClickMenu = (e) => {
         navigate(e.key)
+    }
+    const clickDropDown = (e) => {
+        switch (e.key) {
+            case 'logout':
+                dispatch(logout())
+                navigate('/login')
+                break
+        }
     }
     let location = useLocation()
     const defaultSelectedKeys = location.pathname
@@ -62,7 +73,9 @@ const Index = () => {
                             height: 64,
                         }}
                     />
-                    <Avatar size={45} icon={<UserOutlined />} src={userInfo.icon} />
+                    <Dropdown menu={{ items: [{ label: '退出登录 ', key: 'logout' }], onClick: clickDropDown }}>
+                        <Avatar size={45} icon={<UserOutlined />} src={userInfo.icon} />
+                    </Dropdown>
                 </Header>
                 <Content
                     className='overflow-y-scroll '

@@ -3,11 +3,13 @@ import { adminDelete, adminList, adminUpdate } from '@/api/admin'
 import { Table, Image, Button, Switch, Modal, message } from "antd"
 import { useEffect, useState } from "react"
 import UserForm from './userForm'
+import UserRole from './userRole'
 const { Column } = Table
 
 function User() {
     let [dataSource, setDataSource] = useState([])
-    let [visible, setVisible] = useState(false)
+    let [roleVisible, setRoleVisible] = useState(false)
+    let [formVisible, setFormVisible] = useState(false)
     let [userId, setUserId] = useState(0)
     useEffect(() => {
         getAdminList()
@@ -32,7 +34,7 @@ function User() {
     }
     const editHandle = (id) => {
         setUserId(id)
-        setVisible(true)
+        setFormVisible(true)
     }
     const deleteHandle = (id) => {
         Modal.confirm({
@@ -59,11 +61,15 @@ function User() {
         //更新数据
         getAdminList()
     }
+    const roleHandle = (id) => {
+        setUserId(id)
+        setRoleVisible(true)
+    }
     return (
         <div>
             <div className='mb-2'>
                 <Button type='primary' onClick={() => {
-                    setVisible(true)
+                    setFormVisible(true)
                 }}>添加用户</Button>
             </div>
             <Table dataSource={dataSource} onChange={tableChange}>
@@ -78,7 +84,7 @@ function User() {
                     return time
                 }} />
                 <Column align='center' title="最后登录" dataIndex="loginTime" key="loginTime" render={(time) => {
-                    return time
+                    return time || 'N/A'
                 }} />
                 <Column align='center' title="是否启用" dataIndex="status" key="status" render={(status, item) => {
                     return <Switch checked={status == 1} onChange={() => statusChange(item.id, status)}></Switch>
@@ -86,7 +92,7 @@ function User() {
                 <Column align='center' title="操作" dataIndex="action" key="action" render={(_, item) => {
                     return (
                         <div>
-                            <Button type='link' className='mr-2'>分配角色</Button>
+                            <Button type='link' className='mr-2' onClick={() => roleHandle(item.id)}>分配角色</Button>
                             <Button type='link' className='mr-2' onClick={() => editHandle(item.id)}>编辑</Button>
                             <Button type='link' className='mr-2' onClick={() => deleteHandle(item.id)}>删除</Button>
                         </div>
@@ -94,11 +100,20 @@ function User() {
                 }} />
             </Table>
 
-            <UserForm visible={visible} id={userId} onOk={(e) => {
+            <UserForm visible={formVisible} id={userId} onOk={(e) => {
                 console.log('userForm ok ', e)
+                setFormVisible(false)
+                getAdminList()
             }} onCancel={() => {
-                setVisible(false)
+                setFormVisible(false)
             }}></UserForm>
+
+            <UserRole visible={roleVisible} id={userId} onOk={(e) => {
+                console.log('UserRole ok ', e)
+                setRoleVisible(false)
+            }} onCancel={() => {
+                setRoleVisible(false)
+            }}></UserRole>
         </div>
     )
 }

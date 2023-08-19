@@ -1,4 +1,5 @@
 import request from '@/utils/request'
+import qs from 'qs'
 
 export function adminLogin(data) {
     return request({
@@ -47,5 +48,23 @@ export function adminUpdate(id, data) {
         url: `/admin/update/${id}`,
         method: 'post',
         data
+    })
+}
+
+export function adminRole(id) {
+    return request({
+        url: `/admin/role/${id}`,
+        method: 'get',
+    })
+}
+
+export function adminRoleUpdate(params) {
+    return request({
+        url: `admin/role/update`,
+        method: 'post',
+        params,
+        paramsSerializer(params) {
+            return qs.stringify(params, { indices: false })
+        }
     })
 }
